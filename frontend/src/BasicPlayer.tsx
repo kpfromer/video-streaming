@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
-export default class BasicPlayer extends Component {
+export interface BasicPlayerProps {
+  onLog: ({ message, error }: { message: string, error: boolean }) => any
+}
+
+export default class BasicPlayer extends Component<BasicPlayerProps> {
 
   static propTypes = {
     onLog: PropTypes.func
   }
 
-  static defaultProps = {
-    onLog: ({ message, error }) => {}
+  public static defaultProps = {
+    onLog: () => {}
   }
 
   state = { url: '' }
 
-  createSourceBuffer(mediaSource) {
+  createSourceBuffer(mediaSource: MediaSource) {
     const sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8,vorbis"'); // TODO: MIME TYPE
     sourceBuffer.addEventListener('updateend', () => {
       this.props.onLog({ message: 'Ready', error: false });
@@ -36,7 +40,7 @@ export default class BasicPlayer extends Component {
   }
 
   componentDidMount() {
-    if (!window.MediaSource || !MediaSource.isTypeSupported('video/webm; codecs="vp8,vorbis"')) {
+    if (!MediaSource || !MediaSource.isTypeSupported('video/webm; codecs="vp8,vorbis"')) {
       this.props.onLog({ message: 'Your browser is not supported', error: true });
       return;
     }
