@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
+    "watch": "gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kyle Pfromer",
@@ -16,7 +17,7 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
-    "gulp": "^4.0.0",
+    "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
     "gulp-nodemon": "^2.4.2",
     "rimraf": "^2.6.2"
